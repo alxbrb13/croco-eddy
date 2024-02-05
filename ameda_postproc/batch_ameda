@@ -1,0 +1,10 @@
+#!/bin/csh
+#PBS -q omp
+#PBS -l select=1:ncpus=16:mem=64gb
+#PBS -l walltime=08:00:00
+#PBS -N ameda1
+
+setenv MLM_LICENSE_FILE "27000@triagoz.ifremer.fr"
+setenv EXPN "QWA_rev1h"  # nom dossier experience
+
+/appli/matlab/2018b/bin/matlab -nodesktop -nodisplay < /home6/datahome/abarboni/AMEDA/MAIN_AMEDA_WindEddy.m > /home6/datawork/abarboni/CROCO/RESULT/$EXPN/log_main.txt

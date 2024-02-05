@@ -1,0 +1,63 @@
+title:
+        QWA_rev1w 1kM 100 levels 1-week forcing for NIIW
+
+time_stepping: NTIMES   dt[sec]  NDTFAST  NINFO
+               500000     96     50      900
+
+time_stepping_nbq: NDTNBQ    CSOUND_NBQ    VISC2_NBQ
+                     1          200          1.
+
+S-coord: THETA_S,   THETA_B,    Hc (m)
+         8.0d0      0.0d0       400.0d0
+
+grid:  filename
+                          grd_lat385_1km.nc
+
+initial: NRREC  filename
+          0       
+                         qwa_rev1w_rst.nc
+restart:          NRST, NRPFRST / filename
+                  162000   -1
+                         qwa_rev1w-2_rst.nc
+
+history: LDEFHIS, NWRT, NRPFHIS / filename
+            T     75      0
+                          /home6/scratch/abarboni/QWA_HIS/qwa_rev1w-2_his.nc
+averages: NTSAVG, NAVG, NRPFAVG / filename
+            1     1800     0
+                          /home6/scratch/abarboni/QWA_HIS/qwa_rev1w-2_avg.nc
+
+primary_history_fields: zeta UBAR VBAR  U  V   wrtT(1:NT)
+                          T    F   F    T  T    30*T
+auxiliary_history_fields:   rho Omega W  Akv  Akt  Aks Visc3d Diff3d  HBL HBBL Bostr Wstr Ustr Vstr Shfl rsw rlw lat sen Hm HEL BIOL
+                             F   F    T   F    T    F   F      F       T   F    F     20*F
+gls_history_fields:   TKE  GLS  Lscale
+                       F    F     F
+
+primary_averages: zeta UBAR VBAR  U  V   wrtT(1:NT)
+                   T    F    F    F  F   40*T
+auxiliary_averages: rho Omega  W  Akv  Akt  Aks  Bvf Visc3d Diff3d HBL HBBL Bostr Bustr Bvstr Wstr Ustr Vstr Shfl Swfl rsw rlw lat sen HEL
+                     F   F     T   F    F    F    F    F     F      T   F    F     F     F     T    T    T     T   T   12*F
+gls_averages:   TKE  GLS  Lscale
+                 F     F    F
+
+rho0:
+      1026.0
+
+bottom_drag:     RDRG(m/s),      RDRG2, Zob [m],  Cdb_min, Cdb_max
+                 0.              0.     0.        0.       0.
+
+gamma2:
+                 1.
+
+lin_EOS_cff:  R0 [86kg/m3], T0 [Celsius], S0 [PSU], TCOEF [1/Celsius], SCOEF [1/PSU]
+              26.          25.            37.        0.28                0.78
+
+vertical_mixing: Akv_bak, Akt_bak [m^2/sec]
+                 0.00000001   0.00000001  
+
+lateral_visc:   VISC2,    VISC4    [m^2/sec for all]
+                0.        0.
+
+tracer_diff2: TNU2(1:NT)           [m^2/sec for all]
+              0.d0 0.d0 0.d0 0.d0 0.d0 0.d0 0.d0 0.d0 0.d0

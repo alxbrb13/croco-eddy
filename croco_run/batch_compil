@@ -1,0 +1,18 @@
+#!/bin/csh
+#PBS -l select=1:mem=6g
+#PBS -l walltime=00:20:00
+
+# modify walltime
+
+# cd to the directory you submitted your job
+cd $PBS_O_WORKDIR
+
+# load the libraries
+source /usr/share/Modules/3.2.10/init/csh
+module purge
+module load   NETCDF/4.3.3.1-mpt-intel2016  # faster (9:03.32)  but result not exact  as caparmor 
+
+./jobcomp > & out_comp
+
+rm kRGB*
+

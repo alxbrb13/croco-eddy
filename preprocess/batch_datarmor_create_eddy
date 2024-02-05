@@ -1,0 +1,10 @@
+#!/bin/csh
+#PBS -q omp
+#PBS -l select=1:ncpus=16:mem=60gb
+#PBS -l walltime=01:00:00
+#PBS -N croco_eddy
+
+setenv MLM_LICENSE_FILE "27000@triagoz.ifremer.fr"
+
+/appli/matlab/2018b/bin/matlab -nodesktop -nodisplay < /home6/datahome/abarboni/CROCO/croco-eddy/preprocess/make_vortex.m > /home6/datahome/abarboni/CROCO/croco-eddy/preprocess/log_eddy.txt
+

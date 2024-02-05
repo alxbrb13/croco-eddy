@@ -1,0 +1,26 @@
+#!/bin/csh
+#PBS -q mpi_4
+#PBS -l mem=60gb
+#PBS -l walltime=22:00:00
+#PBS -N QWA_rev1w
+# modify mpi_NN, walltime,mpiprocs,memory
+# NN =Number of nodes (one node= 28 cpus)
+# NN= 1 for 28 cores, NN= 2 for 56...
+
+# cd to the directory you submitted your job
+cd $PBS_O_WORKDIR
+
+# load the libraries
+source /usr/share/Modules/3.2.10/init/csh
+module purge
+module load NETCDF/4.3.3.1-mpt-intel2016  # faster (9:03.32)  but result not exact  as caparmor 
+
+# submit job
+date
+echo "submit MPI job with  $NETCDF_MODULE "
+setenv mpiproc `cat $PBS_NODEFILE  | wc -l`
+echo Number of MPI cpus : $mpiproc
+time $MPI_LAUNCH -n 100 ./croco croco.in.QWA >& ./croco.out.QWA_rev1w
+date
+
+# cleaning
