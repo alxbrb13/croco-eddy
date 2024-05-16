@@ -19,9 +19,7 @@ The modified test case used in Barboni et al (2024) is under `VORTEX_LMD` key.
 
 Keys `BULK_FLUX`, `BULK_LMD` and `BULK_SM_UPDATE` should be DEFINED , keys `ANA_STFLUX`,`ANA_SMFLUX`,`IN_REAL_WIND`,`IN_REAL_STFLUX` and `IN_REALSRFLUX` should NOT be defined
 
-Current feedback option is available with key `CFB_STRESS`. This configuration was not tested in Barboni et al (2024), but comparison is shown in Fig.5.4 and 5.5 in Barboni, A. (2023), [PhD manuscript] Surface and subsurface evolution of mesoscale eddies under atmospheric forcing: case study in the
-Mediterranean Sea
-Thermal current feedback (ocean current retroaction on the thermal flux) is available (but not tested) with key `CFB_STRESS`
+Current feedback option is available with key `CFB_STRESS` ( This configuration is not tested in Barboni et al (2024))
 
 ### Simulations with direct air-sea flux forcing (no COARE parametrization)
 
@@ -33,10 +31,9 @@ Set up in `jobcomp` the `SOURCE` variable to point to your CROCO code repository
 Compile (`batch_compil` to do this on Datarmor)
 A `Compile` folder should appear with raw Fortran routines (.F) and precompiled ones (_.f), check that your changes and key choices were taken into account in `_.f` files.
 
-Set up experiment parameters (timestep, recorded and averaged variables, output path, etc.) in `croco.in.QWA`. Best practice is `expname_his.nc` for history variables and `expname_avg.nc` for averaged ones.
-Execute the code with `batch_exe_croco`
+Set up experiment parameters (timestep, recorded and averaged variables, output path, etc.) in `croco.in.QWA` and execute the code with `batch_exe_croco`
 
-## Eddy tracking postprocessing
+## Eddy tracking postprocessing (AMEDA)
 
 Output files are usually very heavy. First slice the model output to retain only the *averaged* sea surface height :
 `ncks -v zeta /output-path/expname_avg.nc /some-work-space-path/expname_ssh.nc`
