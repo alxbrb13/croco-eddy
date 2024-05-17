@@ -37,26 +37,37 @@ Set up experiment parameters (timestep, recorded and averaged variables, output 
 
 Tools are porvided in folder `ameda_postproc/`.
 
-Output files are usually very heavy. First slice the model output to retain only the *averaged* sea surface height :
-`ncks -v zeta /output-path/expname_avg.nc /some-work-space-path/expname_ssh.nc`
+Output files are usually very heavy. First slice the model output to retain only the *averaged* sea surface height. Warning : here you retain time slicing of averaged files, then be careful with `dps` later.
+```
+ncks -v zeta /output-path/expname_avg.nc /some-work-space-path/expname_ssh.nc
+```
 
 Compute geostrophic speed using `make_geo_file_zeta.m` (you can launch it with `batch_geos_matlab`). zonal and meridional speed are computed in `expname_ssu.nc`and `expname_ssv.nc`
 
 Then performed AMEDA eddy tracking. User parameters are set in `keys_sources_WindEddy_.m`. AMEDA code is as in https://github.com/briaclevu/AMEDA
-Some modifications (mostly grid normalization) can be tracked typing `grep -r WindEddy *`
-- source should be `WindEddy`, config is `''`
+Some modifications in the sources (mostly grid normalization) can be tracked typing `grep -r WindEddy *`
+- `source` should be `WindEddy`, config is `''`
 - `runname` is experiment folder name, `expname` is output file name without `_ssh.nc`
-- change nc_u, nc_v, nc_ssh file names accordingly, same for variable names
+- change `nc_u`, `nc_v`, `nc_ssh` file names accordingly, same for variable names
 - WARNING Coriolis parameter `f_0` and time step `dps` should be manually set. `dps` is the time between 2 averaging steps
 - `deg` factor can be increased to reduce computation time (typically `deg=2` for 1km grid size)
 - `borders` set the border replication to mimic periodic borders (typically `borders=40` for `deg=2` and 1km grid size)
 
-Launch AMEDA running `MAIN_AMEDA_WindEddy.m`, no modification needed there (you can launch it with `batch_ameda`.
+Launch AMEDA running `MAIN_AMEDA_WindEddy.m`, no modification needed there (you can launch it with `batch_ameda`).
 
 ## 4- Experiment analysis
 
-- First use the notebook `AMEDA-Vort-SST-MLD.ipynb` to compute SST and surface Vorticity images
-- Use `AMEDA-N2-MLD-vert.ipynb` to extract relevant analysis and store it in a light `.npy` file per experiment
+Create a dedicated conda environment to run the notebooks :
+
+```
+$ conda create env -n croco-eddy
+$ conda activate croco-eddy
+$ conda install scipy numpy netCDF4 h5py matplotlib tqdm imageio imageio-ffmpeg jupyter notebook ipywidgets
+$ jupyter notebook
+```
+
+- First use the notebook `AMEDA-Vort-SST-MLD.ipynb` to compute SST and surface Vorticity images. This notebook is dedicated to surface 2D fields
+- Use `AMEDA-N2-MLD-vert.ipynb` to extract eddy vertical structure  and store it in a light `.npy` file per experiment
 - Use `Eddy_timeseries_deltaT-Q-Mix.ipynb` to gather all `.npy` files and produce the comparison figures (Fig. 6 and 9 in Barboni et al, 2024)
 - Near-inertial waves spectral investigation is done in `AMEDA_Buoyancy_flux_NIIW.ipynb` (cf Fig.10 in Barboni et al, 2024)
 
