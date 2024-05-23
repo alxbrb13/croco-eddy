@@ -60,16 +60,19 @@ Launch AMEDA running `MAIN_AMEDA_WindEddy.m`, no modification needed there (you 
 Create a dedicated conda environment to run the notebooks :
 
 ```
-$ conda create env -n croco-eddy
-$ conda activate croco-eddy
+$ conda create env -n crocoeddy
+$ conda activate crocoeddy
 $ conda install scipy numpy netCDF4 h5py matplotlib tqdm imageio imageio-ffmpeg jupyter notebook ipywidgets
 $ jupyter notebook
 ```
+Each notebook is independent and understandable alone, except the last one (where extracted `.npy` files for each experiment are browsed)
 
-- First use the notebook `AMEDA-Vort-SST-MLD.ipynb` to compute SST and surface Vorticity images. This notebook is dedicated to surface 2D fields
-- Use `AMEDA-N2-MLD-vert.ipynb` to extract eddy vertical structure  and store it in a light `.npy` file per experiment
+- First use the notebook `AMEDA-2D-Vort-SST-Movie.ipynb` to compute SST and near-surface Vorticity images and processs movie with AMEDA detections. This notebook is dedicated to surface 2D fields
+- Use `AMEDA-SST-MLD-Movie.ipynb` to compute SST and MLD images, and also Dissipation/Diffusion section (cf Fig.7-8 in Barboni et al, 2024)
+- Use `AMEDA-Vertical-N2-MLD-Extract.ipynb` to extract vertical structure following AMEDA detections, and store it in a light `.npy` file per experiment (cf Fig.4,5 and 11 in Barboni et al, 2024)
+- Near-inertial waves spectral investigation is done in `AMEDA-Vertical-NIW-Fourier.ipynb` (cf Fig.10 in Barboni et al, 2024)
+
 - Use `Eddy_timeseries_deltaT-Q-Mix.ipynb` to gather all `.npy` files and produce the comparison figures (Fig. 6 and 9 in Barboni et al, 2024)
-- Near-inertial waves spectral investigation is done in `AMEDA_Buoyancy_flux_NIIW.ipynb` (cf Fig.10 in Barboni et al, 2024)
 
 
 
