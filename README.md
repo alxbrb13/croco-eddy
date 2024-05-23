@@ -68,8 +68,12 @@ $ jupyter notebook
 Each notebook is independent and understandable alone, except the last one (where extracted `.npy` files for each experiment are browsed)
 
 - First use the notebook `AMEDA-2D-Vort-SST-Movie.ipynb` to compute SST and near-surface Vorticity images and processs movie with AMEDA detections. This notebook is dedicated to surface 2D fields
-- Use `AMEDA-SST-MLD-Movie.ipynb` to compute SST and MLD images, and also Dissipation/Diffusion section (cf Fig.7-8 in Barboni et al, 2024)
+- Use `AMEDA-SST-MLD-Movie.ipynb` : similar as the first one, but with MLD (requiring to load 3D data) and also Dissipation/Diffusion section (cf Fig.7-8 in Barboni et al, 2024)
+ ![Example_Notebook_MLD](https://github.com/alxbrb13/croco-eddy/assets/64325384/feb6265b-a488-482f-901b-cc21943ed892)
+
 - Use `AMEDA-Vertical-N2-MLD-Extract.ipynb` to extract vertical structure following AMEDA detections, and store it in a light `.npy` file per experiment (cf Fig.4,5 and 11 in Barboni et al, 2024)
+![Example_Notebook_Timeseries](https://github.com/alxbrb13/croco-eddy/assets/64325384/d16666c4-8e40-48eb-b8ee-90c693148e0c)
+
 - Near-inertial waves spectral investigation is done in `AMEDA-Vertical-NIW-Fourier.ipynb` (cf Fig.10 in Barboni et al, 2024)
 
 - Use `Eddy_timeseries_deltaT-Q-Mix.ipynb` to gather all `.npy` files and produce the comparison figures (Fig. 6 and 9 in Barboni et al, 2024)
